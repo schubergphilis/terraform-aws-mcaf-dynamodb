@@ -75,11 +75,6 @@ resource "aws_dynamodb_table" "table" {
     },
   )
 
-  timeouts {
-    create = lookup(var.timeouts, "create", null)
-    delete = lookup(var.timeouts, "delete", null)
-    update = lookup(var.timeouts, "update", null)
-  }
 }
 
 resource "aws_dynamodb_contributor_insights" "table_insight" {

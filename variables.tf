@@ -103,7 +103,6 @@ variable "stream_view_type" {
   default     = null
 }
 
-
 variable "kms_key_arn" {
   description = "The ARN of the CMK that should be used for the AWS KMS encryption. This attribute should only be specified if the key is different from the default DynamoDB CMK, alias/aws/dynamodb."
   type        = string
@@ -114,16 +113,6 @@ variable "tags" {
   description = "A map of tags to add to all resources"
   type        = map(string)
   default     = {}
-}
-
-variable "timeouts" {
-  description = "Updated Terraform resource management timeouts"
-  type        = map(string)
-  default = {
-    create = "10m"
-    update = "60m"
-    delete = "10m"
-  }
 }
 
 variable "table_class" {
