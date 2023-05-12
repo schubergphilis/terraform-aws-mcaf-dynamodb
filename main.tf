@@ -65,7 +65,7 @@ resource "aws_dynamodb_table" "table" {
 
   server_side_encryption {
     enabled     = true
-    kms_key_arn = var.server_side_encryption_kms_key_arn
+    kms_key_arn = var.kms_key_arn
   }
 
   tags = merge(

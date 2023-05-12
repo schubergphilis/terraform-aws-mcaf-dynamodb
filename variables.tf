@@ -1,19 +1,16 @@
 variable "name" {
   description = "Name of the DynamoDB table"
   type        = string
-  default     = null
 }
 
 variable "attributes" {
   description = "List of nested attribute definitions. Only required for hash_key and range_key attributes. Each attribute has two properties: name - (Required) The name of the attribute, type - (Required) Attribute type, which must be a scalar type: S, N, or B for (S)tring, (N)umber or (B)inary data"
   type        = list(map(string))
-  default     = []
 }
 
 variable "hash_key" {
   description = "The attribute to use as the hash (partition) key. Must also be defined as an attribute"
   type        = string
-  default     = null
 }
 
 variable "range_key" {
@@ -41,9 +38,9 @@ variable "read_capacity" {
 }
 
 variable "point_in_time_recovery_enabled" {
-  description = "Whether to enable point-in-time recovery"
+  description = "Set to true to enable point-in-time recovery"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "ttl_enabled" {
@@ -60,24 +57,42 @@ variable "ttl_attribute_name" {
 
 variable "global_secondary_indexes" {
   description = "Describe a GSI for the table; subject to the normal limits on the number of GSIs, projected attributes, etc."
-  type        = any
-  default     = []
+  type = list(object({
+    name               = string
+    hash_key           = string
+    projection_type    = string
+    range_key          = optional(string, null)
+    read_capacity      = optional(string, null)
+    write_capacity     = optional(string, null)
+    non_key_attributes = optional(string, null)
+  }))
+  default = []
 }
 
 variable "local_secondary_indexes" {
   description = "Describe an LSI on the table; these can only be allocated at creation so you cannot change this definition after you have created the resource."
-  type        = any
-  default     = []
+  type = list(object({
+    name               = string
+    range_key          = string
+    projection_type    = string
+    non_key_attributes = optional(string, null)
+  }))
+  default = []
 }
 
 variable "replica_regions" {
-  description = "Region names for creating replicas for a global DynamoDB table."
-  type        = any
-  default     = []
+  description = "Region names for creating replicas for a global DynamoDB table including parameters."
+  type = list(object({
+    region_name            = string
+    kms_key_arn            = optional(string, null)
+    propagate_tags         = optional(bool, null)
+    point_in_time_recovery = optional(bool, null)
+  }))
+  default = []
 }
 
 variable "stream_enabled" {
-  description = "Indicates whether Streams are to be enabled (true) or disabled (false)."
+  description = "Set to true to enable streams"
   type        = bool
   default     = false
 }
@@ -89,7 +104,7 @@ variable "stream_view_type" {
 }
 
 
-variable "server_side_encryption_kms_key_arn" {
+variable "kms_key_arn" {
   description = "The ARN of the CMK that should be used for the AWS KMS encryption. This attribute should only be specified if the key is different from the default DynamoDB CMK, alias/aws/dynamodb."
   type        = string
   default     = "aws/dynamodb"
