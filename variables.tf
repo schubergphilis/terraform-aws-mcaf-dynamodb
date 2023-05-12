@@ -64,7 +64,7 @@ variable "global_secondary_indexes" {
     range_key          = optional(string, null)
     read_capacity      = optional(string, null)
     write_capacity     = optional(string, null)
-    non_key_attributes = optional(string, null)
+    non_key_attributes = optional(list(string), null)
   }))
   default = []
 }
@@ -75,7 +75,7 @@ variable "local_secondary_indexes" {
     name               = string
     range_key          = string
     projection_type    = string
-    non_key_attributes = optional(string, null)
+    non_key_attributes = optional(list(string), null)
   }))
   default = []
 }
