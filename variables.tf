@@ -133,7 +133,7 @@ variable "table_class" {
 }
 
 variable "enable_dynamodb_insights" {
-  description = "Enable provisioning of DynamoDB contributor insights resource"
+  description = "Set to true to enable CloudWatch contributor insights for DynamoDB"
   type        = bool
   default     = false
 }
