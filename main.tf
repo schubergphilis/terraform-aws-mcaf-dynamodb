@@ -4,18 +4,23 @@ resource "aws_dynamodb_table" "table" {
   hash_key         = var.hash_key
   range_key        = var.range_key
   read_capacity    = var.read_capacity
-  write_capacity   = var.write_capacity
   stream_enabled   = var.stream_enabled
   stream_view_type = var.stream_view_type
   table_class      = var.table_class
+  write_capacity   = var.write_capacity
+
+  point_in_time_recovery {
+    enabled = var.point_in_time_recovery_enabled
+  }
+
+  server_side_encryption {
+    enabled     = true
+    kms_key_arn = var.kms_key_arn
+  }
 
   ttl {
     enabled        = var.ttl_enabled
     attribute_name = var.ttl_attribute_name
-  }
-
-  point_in_time_recovery {
-    enabled = var.point_in_time_recovery_enabled
   }
 
   dynamic "attribute" {
@@ -63,21 +68,16 @@ resource "aws_dynamodb_table" "table" {
     }
   }
 
-  server_side_encryption {
-    enabled     = true
-    kms_key_arn = var.kms_key_arn
-  }
-
   tags = merge(
     var.tags,
     {
       "Name" = format("%s", var.name)
     },
   )
-
 }
 
 resource "aws_dynamodb_contributor_insights" "table_insight" {
-  count      = var.enable_dynamodb_insights ? 1 : 0
+  count = var.enable_dynamodb_insights ? 1 : 0
+
   table_name = var.name
 }
