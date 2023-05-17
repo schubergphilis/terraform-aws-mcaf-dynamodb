@@ -23,7 +23,7 @@ jobs:
       - name: Setup Terraform Linters
         uses: terraform-linters/setup-tflint@v2
         with:
-          github_token: ${{ github.token }}
+          github_token: ${{ github.token }}        
 
       - name: Terraform Format
         id: fmt
