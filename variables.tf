@@ -38,7 +38,7 @@ variable "hash_key" {
 variable "kms_key_arn" {
   description = "The ARN of the CMK that should be used for the AWS KMS encryption. This attribute should only be specified if the key is different from the default DynamoDB CMK, alias/aws/dynamodb."
   type        = string
-  default     = "aws/dynamodb"
+  default     = null
 }
 
 variable "local_secondary_indexes" {
