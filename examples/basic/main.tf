@@ -7,6 +7,7 @@ module "table" {
 
   name                           = "example"
   hash_key                       = "pk"
+  kms_key_arn                    = null
   range_key                      = "sk"
   point_in_time_recovery_enabled = true
 
