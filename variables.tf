@@ -15,7 +15,6 @@ variable "enable_dynamodb_insights" {
   default     = false
 }
 
-
 variable "global_secondary_indexes" {
   description = "Describe a GSI for the table; subject to the normal limits on the number of GSIs, projected attributes, etc."
   type = list(object({
@@ -36,9 +35,8 @@ variable "hash_key" {
 }
 
 variable "kms_key_arn" {
-  description = "The ARN of the CMK that should be used for the AWS KMS encryption. This attribute should only be specified if the key is different from the default DynamoDB CMK, alias/aws/dynamodb."
+  description = "The ARN of the KMS key to use; if set to `null` the `aws/dynamodb` AWS-managed key will be used"
   type        = string
-  default     = "aws/dynamodb"
 }
 
 variable "local_secondary_indexes" {
