@@ -35,7 +35,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_attributes"></a> [attributes](#input\_attributes) | List of nested attribute definitions. Only required for hash\_key and range\_key attributes. Each attribute has two properties: name - (Required) The name of the attribute, type - (Required) Attribute type, which must be a scalar type: S, N, or B for (S)tring, (N)umber or (B)inary data. | `list(map(string))` | n/a | yes |
 | <a name="input_hash_key"></a> [hash\_key](#input\_hash\_key) | The attribute to use as the hash (partition) key. Must also be defined as an attribute | `string` | n/a | yes |
-| <a name="input_kms_key_arn"></a> [kms\_key\_arn](#input\_kms\_key\_arn) | The ARN of the CMK that should be used for the AWS KMS encryption. If set to 'null' the AWS managed key aws/dynamodb is used | `string` | n/a | yes |
+| <a name="input_kms_key_arn"></a> [kms\_key\_arn](#input\_kms\_key\_arn) | The ARN of the KMS key to use; if set to `null` the `aws/dynamodb` AWS-managed key will be used | `string` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | Name of the DynamoDB table | `string` | n/a | yes |
 | <a name="input_billing_mode"></a> [billing\_mode](#input\_billing\_mode) | Controls how you are billed for read/write throughput and how you manage capacity. The valid values are PROVISIONED or PAY\_PER\_REQUEST. | `string` | `"PAY_PER_REQUEST"` | no |
 | <a name="input_enable_dynamodb_insights"></a> [enable\_dynamodb\_insights](#input\_enable\_dynamodb\_insights) | Set to true to enable CloudWatch contributor insights for DynamoDB | `bool` | `false` | no |
