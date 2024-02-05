@@ -9,6 +9,12 @@ variable "billing_mode" {
   default     = "PAY_PER_REQUEST"
 }
 
+variable "deletion_protection_enabled" {
+  description = "Enables deletion protection for the table."
+  type        = bool
+  default     = true
+}
+
 variable "enable_dynamodb_insights" {
   description = "Set to true to enable CloudWatch contributor insights for DynamoDB"
   type        = bool
