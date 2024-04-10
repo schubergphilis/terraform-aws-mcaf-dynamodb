@@ -1,13 +1,14 @@
 resource "aws_dynamodb_table" "table" {
-  name             = var.name
-  billing_mode     = var.billing_mode
-  hash_key         = var.hash_key
-  range_key        = var.range_key
-  read_capacity    = var.read_capacity
-  stream_enabled   = var.stream_enabled
-  stream_view_type = var.stream_view_type
-  table_class      = var.table_class
-  write_capacity   = var.write_capacity
+  name                        = var.name
+  billing_mode                = var.billing_mode
+  deletion_protection_enabled = var.deletion_protection_enabled
+  hash_key                    = var.hash_key
+  range_key                   = var.range_key
+  read_capacity               = var.read_capacity
+  stream_enabled              = var.stream_enabled
+  stream_view_type            = var.stream_view_type
+  table_class                 = var.table_class
+  write_capacity              = var.write_capacity
 
   point_in_time_recovery {
     enabled = var.point_in_time_recovery_enabled
