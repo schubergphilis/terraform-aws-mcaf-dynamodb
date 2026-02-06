@@ -16,7 +16,7 @@ IMPORTANT: We do not pin modules to versions in our examples. We highly recommen
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.31.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 6.13.0 |
 
 ## Modules
 
@@ -35,15 +35,15 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_attributes"></a> [attributes](#input\_attributes) | Attribute definitions for table keys and index keys (provider constraint: only key/index attributes may be declared).<br/>Each item must include: `name` and `type` (S, N, or B).<br/><br/>Note: TTL attribute must NOT be declared here unless it is used as a key in an index. | <pre>list(object({<br/>    name = string<br/>    type = string<br/>  }))</pre> | n/a | yes |
+| <a name="input_hash_key"></a> [hash\_key](#input\_hash\_key) | Partition (hash) key attribute name. Must be defined in `attributes`. | `string` | n/a | yes |
+| <a name="input_kms_key_arn"></a> [kms\_key\_arn](#input\_kms\_key\_arn) | KMS key ARN for server-side encryption. When null, AWS-managed key (aws/dynamodb) is used. | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | DynamoDB table name. | `string` | n/a | yes |
 | <a name="input_billing_mode"></a> [billing\_mode](#input\_billing\_mode) | Billing mode: PROVISIONED or PAY\_PER\_REQUEST. | `string` | `"PAY_PER_REQUEST"` | no |
 | <a name="input_deletion_protection_enabled"></a> [deletion\_protection\_enabled](#input\_deletion\_protection\_enabled) | Enable deletion protection. | `bool` | `true` | no |
 | <a name="input_enable_dynamodb_insights"></a> [enable\_dynamodb\_insights](#input\_enable\_dynamodb\_insights) | Enable DynamoDB Contributor Insights. | `bool` | `false` | no |
 | <a name="input_enable_dynamodb_insights_gsis"></a> [enable\_dynamodb\_insights\_gsis](#input\_enable\_dynamodb\_insights\_gsis) | Enable Contributor Insights on all GSIs. | `bool` | `false` | no |
 | <a name="input_global_secondary_indexes"></a> [global\_secondary\_indexes](#input\_global\_secondary\_indexes) | Global secondary indexes (GSIs). | <pre>list(object({<br/>    name            = string<br/>    hash_key        = string<br/>    projection_type = string<br/>    range_key       = optional(string, null)<br/><br/>    read_capacity  = optional(number, null)<br/>    write_capacity = optional(number, null)<br/><br/>    non_key_attributes = optional(list(string), null)<br/><br/>    on_demand_throughput = optional(object({<br/>      max_read_request_units  = optional(number, null)<br/>      max_write_request_units = optional(number, null)<br/>    }), null)<br/><br/>    warm_throughput = optional(object({<br/>      read_units_per_second  = optional(number, null)<br/>      write_units_per_second = optional(number, null)<br/>    }), null)<br/>  }))</pre> | `[]` | no |
-| <a name="input_hash_key"></a> [hash\_key](#input\_hash\_key) | Partition (hash) key attribute name. Must be defined in `attributes`. | `string` | n/a | yes |
-| <a name="input_kms_key_arn"></a> [kms\_key\_arn](#input\_kms\_key\_arn) | KMS key ARN for server-side encryption. When null, AWS-managed key (aws/dynamodb) is used. | `string` | n/a | yes |
 | <a name="input_local_secondary_indexes"></a> [local\_secondary\_indexes](#input\_local\_secondary\_indexes) | Local secondary indexes (LSIs). Only settable at table creation time. | <pre>list(object({<br/>    name               = string<br/>    range_key          = string<br/>    projection_type    = string<br/>    non_key_attributes = optional(list(string), null)<br/>  }))</pre> | `[]` | no |
-| <a name="input_name"></a> [name](#input\_name) | DynamoDB table name. | `string` | n/a | yes |
 | <a name="input_point_in_time_recovery_enabled"></a> [point\_in\_time\_recovery\_enabled](#input\_point\_in\_time\_recovery\_enabled) | Enable point-in-time recovery (PITR). | `bool` | `true` | no |
 | <a name="input_point_in_time_recovery_period_in_days"></a> [point\_in\_time\_recovery\_period\_in\_days](#input\_point\_in\_time\_recovery\_period\_in\_days) | PITR recovery period in days (1..35). | `number` | `35` | no |
 | <a name="input_range_key"></a> [range\_key](#input\_range\_key) | Sort (range) key attribute name (optional). Must be defined in `attributes` when set. | `string` | `null` | no |
